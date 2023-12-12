@@ -12,7 +12,7 @@ body {
 }
 
 canvas {
-  border: 1px solid #000;
+  border: 8px solid #000;
   cursor: pointer;
   filter: blur(0); /* Зберігаємо ігрове поле невибраним */
 }
@@ -47,4 +47,13 @@ button {
   background-color: #fff;
   padding: 20px;
   text-align: center;
+}
+
+#currentPlayer {
+  font-family: 'Kalnia', serif;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  color: #333;
 }

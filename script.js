@@ -30,7 +30,11 @@ function drawBoard() {
   if (!gameStarted) {
     return;
   }
-
+  const currentPlayerElement = document.getElementById('currentPlayer');
+  if (currentPlayerElement) {
+    const playerName = currentPlayer === 'X' ? playerXName : playerOName;
+    currentPlayerElement.textContent = `${playerName}'s turn`;
+  }
   ctx.lineWidth = 5;
   ctx.strokeStyle = '#000';
   
@@ -59,7 +63,7 @@ function drawBoard() {
 }
 
 function drawSymbol(symbol, x, y) {
-  ctx.lineWidth = 20;
+  ctx.lineWidth = 10;
   ctx.strokeStyle = '#000';
   
   if (symbol === 'X') {
@@ -94,6 +98,12 @@ function handleClick(event) {
     drawBoard();
     checkWinner();
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    const currentPlayerElement = document.getElementById('currentPlayer');
+    if (currentPlayerElement) {
+      const playerName = currentPlayer === 'X' ? playerXName : playerOName;
+      currentPlayerElement.textContent = `${playerName}'s turn`;
+    }
+
   }
 }
 
