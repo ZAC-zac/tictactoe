@@ -1,9 +1,9 @@
 const canvas = document.getElementById('ticTacToeCanvas');
 const ctx = canvas.getContext('2d');
-const cellSize = 200; // Збільшено на 2 рази
+const cellSize = 200;
 let board = [['', '', ''], ['', '', ''], ['', '', '']];
 let currentPlayer = 'X';
-let gameOver = false;
+let gameStarted = false;
 let playerXName = '';
 let playerOName = '';
 let score = { 'X': 0, 'O': 0 };
@@ -13,7 +13,7 @@ function startGame() {
   playerOName = document.getElementById('playerO').value || 'Player O';
   
   document.getElementById('button-container').style.display = 'none';
-  gameStarted = true; // Позначаємо, що гра розпочалась
+  gameStarted = true; 
 
   if (!document.getElementById('game-container')) {
     const gameContainer = document.createElement('div');
@@ -26,11 +26,14 @@ function startGame() {
 }
 
 function drawBoard() {
-  // Якщо гра не розпочалась, не виконуємо решту функції
   if (!gameStarted) {
     return;
   }
-
+  const currentPlayerElement = document.getElementById('currentPlayer');
+  if (currentPlayerElement) {
+    const playerName = currentPlayer === 'X' ? playerXName : playerOName;
+    currentPlayerElement.textContent = `${playerName}'s turn`;
+  }
   ctx.lineWidth = 5;
   ctx.strokeStyle = '#000';
   
@@ -59,10 +62,10 @@ function drawBoard() {
 }
 
 function drawSymbol(symbol, x, y) {
-  ctx.lineWidth = 20;
-  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 10;
   
   if (symbol === 'X') {
+    ctx.strokeStyle = '#000';
     ctx.beginPath();
     ctx.moveTo(x + 15, y + 15);
     ctx.lineTo(x + cellSize - 15, y + cellSize - 15);
@@ -73,6 +76,7 @@ function drawSymbol(symbol, x, y) {
     ctx.lineTo(x + 15, y + cellSize - 15);
     ctx.stroke();
   } else if (symbol === 'O') {
+    ctx.strokeStyle = '#1649b7dc';
     ctx.beginPath();
     ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize / 2 - 15, 0, 2 * Math.PI);
     ctx.stroke();
@@ -80,7 +84,7 @@ function drawSymbol(symbol, x, y) {
 }
 
 function handleClick(event) {
-  if (gameOver) return;
+  if (!gameStarted) return;
 
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -94,6 +98,12 @@ function handleClick(event) {
     drawBoard();
     checkWinner();
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    const currentPlayerElement = document.getElementById('currentPlayer');
+    if (currentPlayerElement) {
+      const playerName = currentPlayer === 'X' ? playerXName : playerOName;
+      currentPlayerElement.textContent = `${playerName}'s turn`;
+    }
+
   }
 }
 
@@ -145,7 +155,6 @@ function showModal(winnerMessage, scoreMessage1, scoreMessage2, scoreMessage3) {
 function ClearCells() {
   board = [['', '', ''], ['', '', ''], ['', '', '']];
   currentPlayer = 'X';
-  gameOver = false;
   document.getElementById('game-over-modal').style.display = 'none';
 }
 
@@ -155,20 +164,14 @@ function resetGame() {
 }
 
 function exitGame() {
-  ClearCells();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  currentPlayer = 'X';
-  score = { 'X': 0, 'O': 0 };
-  document.getElementById('button-container').style.display = 'block';
-  gameStarted = false; // Позначаємо, що гра не розпочалась
-  
+  document.location.reload();
 }
 
-function generateScoreText() {
-  return `Score: ${playerXName}(${score['X']}) ${score['X']} - ${score['O']}(${score['O']}) ${playerOName}`;
-}
-
-// Додано функцію для виклику showModal при нічії
 function showModalTie() {
-  showModal('It\'s a tie!', generateScoreText());
+  showModal(
+    'It\'s a tie!',
+    'Score:',
+    `${playerXName}: ${score['X']}`,
+    `${playerOName}: ${score['O']}`
+  );
 }
