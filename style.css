@@ -10,17 +10,14 @@ body {
   text-align: center;
   position: relative;
   padding: 20px;
-  font-weight: bold;
-  text-align: center;
+  font: bold 18px 'Kalnia', serif;
   color: #333;
-  font-family: 'Kalnia', serif;
-  font-size: 18px;
 }
 
 canvas {
   border: 8px solid #000;
   cursor: pointer;
-  filter: blur(0); /* Зберігаємо ігрове поле невибраним */
+  filter: blur(0);
 }
 
 #button-container {
@@ -29,7 +26,6 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-
 }
 
 button {
@@ -46,10 +42,8 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {  
-  font-family: 'Kalnia', serif;
-  font-size: 18px;
-  font-weight: bold;
+.modal-content {
+  font: bold 18px 'Kalnia', serif;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -59,16 +53,15 @@ button {
   text-align: center;
   color: #333;
   border-radius: 10px;
-
 }
-.modal-content label,input {
+
+.modal-content label, .modal-content input {
   outline: none;
   border: none;
 }
+
 .modal-content button {
-  font-family: 'Kalnia', serif;
-  font-size: 16px;
-  font-weight: bold;
+  font: bold 16px 'Kalnia', serif;
   padding: 10px 20px;
   margin-top: 15px;
   cursor: pointer;
@@ -78,13 +71,13 @@ button {
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
+
 .modal-content button:hover {
   background-color: #eeb449;
 }
+
 #currentPlayer {
-  font-family: 'Kalnia', serif;
-  font-size: 18px;
-  font-weight: bold;
+  font: bold 18px 'Kalnia', serif;
   margin-top: 10px;
   text-align: center;
   color: #333;

@@ -1,9 +1,9 @@
 const canvas = document.getElementById('ticTacToeCanvas');
 const ctx = canvas.getContext('2d');
-const cellSize = 200; // Збільшено на 2 рази
+const cellSize = 200;
 let board = [['', '', ''], ['', '', ''], ['', '', '']];
 let currentPlayer = 'X';
-let gameOver = false;
+let gameStarted = false;
 let playerXName = '';
 let playerOName = '';
 let score = { 'X': 0, 'O': 0 };
@@ -13,7 +13,7 @@ function startGame() {
   playerOName = document.getElementById('playerO').value || 'Player O';
   
   document.getElementById('button-container').style.display = 'none';
-  gameStarted = true; // Позначаємо, що гра розпочалась
+  gameStarted = true; 
 
   if (!document.getElementById('game-container')) {
     const gameContainer = document.createElement('div');
@@ -26,7 +26,6 @@ function startGame() {
 }
 
 function drawBoard() {
-  // Якщо гра не розпочалась, не виконуємо решту функції
   if (!gameStarted) {
     return;
   }
@@ -64,9 +63,9 @@ function drawBoard() {
 
 function drawSymbol(symbol, x, y) {
   ctx.lineWidth = 10;
-  ctx.strokeStyle = '#000';
   
   if (symbol === 'X') {
+    ctx.strokeStyle = '#000';
     ctx.beginPath();
     ctx.moveTo(x + 15, y + 15);
     ctx.lineTo(x + cellSize - 15, y + cellSize - 15);
@@ -77,6 +76,7 @@ function drawSymbol(symbol, x, y) {
     ctx.lineTo(x + 15, y + cellSize - 15);
     ctx.stroke();
   } else if (symbol === 'O') {
+    ctx.strokeStyle = '#1649b7dc';
     ctx.beginPath();
     ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize / 2 - 15, 0, 2 * Math.PI);
     ctx.stroke();
@@ -84,7 +84,7 @@ function drawSymbol(symbol, x, y) {
 }
 
 function handleClick(event) {
-  if (gameOver) return;
+  if (!gameStarted) return;
 
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -155,7 +155,6 @@ function showModal(winnerMessage, scoreMessage1, scoreMessage2, scoreMessage3) {
 function ClearCells() {
   board = [['', '', ''], ['', '', ''], ['', '', '']];
   currentPlayer = 'X';
-  gameOver = false;
   document.getElementById('game-over-modal').style.display = 'none';
 }
 
