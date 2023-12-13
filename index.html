@@ -10,17 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="game-container">
+  <div id="game-container" >
     <canvas id="ticTacToeCanvas" width="600" height="600"></canvas>
 
     <div id="button-container">
-      <label for="playerX">Player X (X's Name):</label>
-      <input type="text" id="playerX" placeholder="Enter name for X"><br>
+      <div class="modal-content">
+        <label for="playerX">Player X (X's Name):</label>
+        <input type="text" id="playerX" placeholder="Enter name for X"><br>
       
-      <label for="playerO">Player O (O's Name):</label>
-      <input type="text" id="playerO" placeholder="Enter name for O"><br>
+        <label for="playerO">Player O (O's Name):</label>
+        <input type="text" id="playerO" placeholder="Enter name for O"><br>
 
-      <button onclick="startGame()">Start Game</button>
+        <button onclick="startGame()">Start Game</button>
+      </div>
     </div>
 
     <div id="currentPlayer"></div>

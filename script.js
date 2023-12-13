@@ -165,20 +165,14 @@ function resetGame() {
 }
 
 function exitGame() {
-  ClearCells();
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  currentPlayer = 'X';
-  score = { 'X': 0, 'O': 0 };
-  document.getElementById('button-container').style.display = 'block';
-  gameStarted = false; // Позначаємо, що гра не розпочалась
-  
+  document.location.reload();
 }
 
-function generateScoreText() {
-  return `Score: ${playerXName}(${score['X']}) ${score['X']} - ${score['O']}(${score['O']}) ${playerOName}`;
-}
-
-// Додано функцію для виклику showModal при нічії
 function showModalTie() {
-  showModal('It\'s a tie!', generateScoreText());
+  showModal(
+    'It\'s a tie!',
+    'Score:',
+    `${playerXName}: ${score['X']}`,
+    `${playerOName}: ${score['O']}`
+  );
 }
