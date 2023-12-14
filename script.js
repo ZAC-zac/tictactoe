@@ -168,10 +168,5 @@ function exitGame() {
 }
 
 function showModalTie() {
-  showModal(
-    'It\'s a tie!',
-    'Score:',
-    `${playerXName}: ${score['X']}`,
-    `${playerOName}: ${score['O']}`
-  );
+  showModal('It\'s a tie!');
 }
