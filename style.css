@@ -93,3 +93,10 @@ button {
   text-align: center;
   color: #333;
 }
+
+
+img {
+  background-color: none;
+  margin-right: 30px;
+  float: right;
+}

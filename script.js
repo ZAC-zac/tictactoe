@@ -12,11 +12,12 @@ function toggleBackgroundMusic() {
   const backgroundMusic = document.getElementById('backgroundMusic');
 
   if (backgroundMusic.paused) {
+    backgroundMusic.volume = 0.1; 
     backgroundMusic.play();
-    musicIcon.src = 'volume-on.png';
+    musicIcon.src = './img/volume-on.png';
   } else {
     backgroundMusic.pause();
-    musicIcon.src = 'volume-off.png'; 
+    musicIcon.src = './img/volume-off.png';
   }
 }
 
@@ -27,9 +28,6 @@ function startGame() {
   document.getElementById('button-container').style.display = 'none';
   gameStarted = true; 
 
-  const backgroundMusic = document.getElementById('backgroundMusic');
-  backgroundMusic.play();
-  
   if (!document.getElementById('game-container')) {
     const gameContainer = document.createElement('div');
     gameContainer.id = 'game-container';
@@ -71,6 +69,9 @@ function drawBoard() {
       const cellValue = board[row][col];
       if (cellValue !== '') {
         drawSymbol(cellValue, col * cellSize, row * cellSize);
+
+        soundEffect(1)
+
       }
     }
   }
@@ -118,8 +119,8 @@ function handleClick(event) {
       const playerName = currentPlayer === 'X' ? playerXName : playerOName;
       currentPlayerElement.textContent = `${playerName}'s turn`;
     }
-    const buttonClickSound = document.getElementById('buttonClickSound');
-        buttonClickSound.play();
+    const TurnSound = document.getElementById('TurnSound');
+        TurnSound.play();
   }
 }
 
@@ -180,9 +181,22 @@ function resetGame() {
 }
 
 function exitGame() {
-  document.location.reload();
+  setTimeout(document.location.reload(),1000);
 }
 
 function showModalTie() {
   showModal('It\'s a tie!');
+}
+
+function soundEffect(soundId){
+  switch(soundId){
+    case 1: {
+      const TurnSound = document.getElementById('TurnSound');
+      TurnSound.play();
+    }
+    case 2: {
+      const ButtonSound = document.getElementById('buttonClickSound')
+      ButtonSound.play();
+    }
+  }
 }
