@@ -8,6 +8,19 @@ let playerXName = '';
 let playerOName = '';
 let score = { 'X': 0, 'O': 0 };
 
+function toggleBackgroundMusic() {
+  const backgroundMusic = document.getElementById('backgroundMusic');
+
+  if (backgroundMusic.paused) {
+    backgroundMusic.volume = 0.1; 
+    backgroundMusic.play();
+    musicIcon.src = './img/volume-on.png';
+  } else {
+    backgroundMusic.pause();
+    musicIcon.src = './img/volume-off.png';
+  }
+}
+
 function startGame() {
   playerXName = document.getElementById('playerX').value || 'Player X';
   playerOName = document.getElementById('playerO').value || 'Player O';
@@ -56,6 +69,9 @@ function drawBoard() {
       const cellValue = board[row][col];
       if (cellValue !== '') {
         drawSymbol(cellValue, col * cellSize, row * cellSize);
+
+        soundEffect(1)
+
       }
     }
   }
@@ -103,7 +119,8 @@ function handleClick(event) {
       const playerName = currentPlayer === 'X' ? playerXName : playerOName;
       currentPlayerElement.textContent = `${playerName}'s turn`;
     }
-
+    const TurnSound = document.getElementById('TurnSound');
+        TurnSound.play();
   }
 }
 
@@ -164,9 +181,22 @@ function resetGame() {
 }
 
 function exitGame() {
-  document.location.reload();
+  setTimeout(document.location.reload(),1000);
 }
 
 function showModalTie() {
   showModal('It\'s a tie!');
+}
+
+function soundEffect(soundId){
+  switch(soundId){
+    case 1: {
+      const TurnSound = document.getElementById('TurnSound');
+      TurnSound.play();
+    }
+    case 2: {
+      const ButtonSound = document.getElementById('buttonClickSound')
+      ButtonSound.play();
+    }
+  }
 }
