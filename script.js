@@ -8,6 +8,18 @@ let playerXName = '';
 let playerOName = '';
 let score = { 'X': 0, 'O': 0 };
 
+function toggleBackgroundMusic() {
+  const backgroundMusic = document.getElementById('backgroundMusic');
+
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    musicIcon.src = 'volume-on.png';
+  } else {
+    backgroundMusic.pause();
+    musicIcon.src = 'volume-off.png'; 
+  }
+}
+
 function startGame() {
   playerXName = document.getElementById('playerX').value || 'Player X';
   playerOName = document.getElementById('playerO').value || 'Player O';
@@ -15,6 +27,9 @@ function startGame() {
   document.getElementById('button-container').style.display = 'none';
   gameStarted = true; 
 
+  const backgroundMusic = document.getElementById('backgroundMusic');
+  backgroundMusic.play();
+  
   if (!document.getElementById('game-container')) {
     const gameContainer = document.createElement('div');
     gameContainer.id = 'game-container';
@@ -103,7 +118,8 @@ function handleClick(event) {
       const playerName = currentPlayer === 'X' ? playerXName : playerOName;
       currentPlayerElement.textContent = `${playerName}'s turn`;
     }
-
+    const buttonClickSound = document.getElementById('buttonClickSound');
+        buttonClickSound.play();
   }
 }
 

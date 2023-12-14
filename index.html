@@ -25,10 +25,23 @@
         <button onclick="startGame()">Start Game</button>
       </div>
     </div>
-
+    
+    <button id="toggleMusicButton" onclick="toggleBackgroundMusic()">
+      <img id="musicIcon" src="volume-on.png" alt="Music Icon">
+    </button>
+    
     <div id="currentPlayer"></div>
   </div>
-
+  <audio id="backgroundMusic" loop autoplay>
+    <source src="background_music.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+  
+  </audio>
+  <audio id="buttonClickSound">
+    <source src="button_click.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
   <div id="game-over-modal" class="modal">
     <div class="modal-content">
       <p id="winner-message"></p>
