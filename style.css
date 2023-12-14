@@ -1,20 +1,31 @@
 body {
-  display: flex;
+  display: inline;
   align-items: center;
   justify-content: center;
   height: 100vh;
   margin: 0;
-}
+  background: linear-gradient(to bottom, #ab8ff7, #ffffff); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 
+}
+.title {
+  text-align: center;
+  font: bold 36px 'Kalnia', serif;
+  color: #1c0d25; 
+  margin-top: 30px; 
+}
 #game-container {
   text-align: center;
   position: relative;
-  padding: 20px;
+  padding: 10px;
   font: bold 18px 'Kalnia', serif;
   color: #333;
 }
 
 canvas {
+  vertical-align: bottom;
   border: 8px solid #000;
   cursor: pointer;
   filter: blur(0);
@@ -73,12 +84,12 @@ button {
 }
 
 .modal-content button:hover {
-  background-color: #eeb449;
+  background-color: #ab8ff7;
 }
 
 #currentPlayer {
   font: bold 18px 'Kalnia', serif;
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
   color: #333;
 }
