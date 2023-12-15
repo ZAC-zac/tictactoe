@@ -149,7 +149,6 @@ function checkWinner() {
 
 function announceWinner() {
   const winnerName = currentPlayer === 'X' ? playerXName : playerOName;
-  const loserName = currentPlayer === 'X' ? playerOName : playerXName;
 
   score[currentPlayer]++;
   showModal(
