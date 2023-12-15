@@ -119,8 +119,7 @@ function handleClick(event) {
       const playerName = currentPlayer === 'X' ? playerXName : playerOName;
       currentPlayerElement.textContent = `${playerName}'s turn`;
     }
-    const TurnSound = document.getElementById('TurnSound');
-        TurnSound.play();
+    soundEffect(1);
   }
 }
 
