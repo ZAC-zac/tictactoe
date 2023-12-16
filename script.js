@@ -28,12 +28,6 @@ function startGame() {
   document.getElementById('button-container').style.display = 'none';
   gameStarted = true; 
 
-  if (!document.getElementById('game-container')) {
-    const gameContainer = document.createElement('div');
-    gameContainer.id = 'game-container';
-    document.body.appendChild(gameContainer);
-  }
-
   drawBoard();
   canvas.addEventListener('click', handleClick);
 }
@@ -181,7 +175,7 @@ function resetGame() {
 }
 
 function exitGame() {
-  setTimeout(document.location.reload(),1000);
+  document.location.reload();
 }
 
 function showModalTie() {
