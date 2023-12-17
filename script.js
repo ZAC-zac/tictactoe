@@ -6,7 +6,63 @@ let currentPlayer = 'X';
 let gameStarted = false;
 let playerXName = '';
 let playerOName = '';
+
 let score = { 'X': 0, 'O': 0 };
+let cookieValue; // Оголосіть глобальну змінну
+
+function loadGameFromCookie() {
+  const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)gameData\s*=\s*([^;]*).*$)|^.*$/, "$1");
+
+  console.log('Load function called');
+  console.log('Full cookie string:', document.cookie);
+  console.log('Cookie value:', cookieValue);
+
+  if (cookieValue) {
+    const decodedJsonString = decodeURIComponent(cookieValue);
+    const gameData = JSON.parse(decodedJsonString);
+
+    playerXName = gameData.playerXName || '';
+    playerOName = gameData.playerOName || '';
+    board = gameData.board || [['', '', ''], ['', '', ''], ['', '', '']];
+    currentPlayer = gameData.currentPlayer || 'X';
+
+    console.log('Game loaded from cookies.');
+    continueGame(); // Додайте цей виклик для продовження гри
+  }
+}
+
+window.onload = function () {
+  console.log('Window loaded');
+  loadGameFromCookie();
+  // інші дії, якщо потрібно
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  loadGameFromCookie();
+  // інші дії, якщо потрібно
+});
+
+function saveGameToCookie() {
+  const gameData = {
+    playerXName: playerXName,
+    playerOName: playerOName,
+    board: board,
+    currentPlayer: currentPlayer,
+  };
+
+  const jsonString = JSON.stringify(gameData);
+
+  const now = new Date();
+  now.setDate(now.getDate() + 7);
+  const expires = now.toGMTString();
+
+  document.cookie = `gameData=${encodeURIComponent(jsonString)}; expires=${expires}; path=/`;
+
+  console.log('Game saved to cookies.');
+  console.log('Cookie value before saving:', jsonString);
+}
+
+
 
 function toggleBackgroundMusic() {
   const backgroundMusic = document.getElementById('backgroundMusic');
@@ -21,6 +77,13 @@ function toggleBackgroundMusic() {
   }
 }
 
+function continueGame(){
+document.getElementById('button-container').style.display = 'none';
+  gameStarted = true; 
+
+  drawBoard();
+  canvas.addEventListener('click', handleClick);
+}
 function startGame() {
   playerXName = document.getElementById('playerX').value || 'Player X';
   playerOName = document.getElementById('playerO').value || 'Player O';
@@ -115,6 +178,7 @@ function handleClick(event) {
     }
     const TurnSound = document.getElementById('TurnSound');
         TurnSound.play();
+        saveGameToCookie();
   }
 }
 
@@ -194,3 +258,6 @@ function soundEffect(soundId){
     }
   }
 }
+window.onload = function () {
+  loadGameFromCookie();
+};
